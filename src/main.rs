@@ -1,7 +1,11 @@
 use clap::Parser;
 
-#[derive(Parser,Debug)]
-#[command(name="recho", version, about="A simple echo-like CLI took written in Rust")]
+#[derive(Parser, Debug)]
+#[command(
+    name = "recho",
+    version,
+    about = "A simple echo-like CLI took written in Rust"
+)]
 struct Args {
     /// Remove trailing newline
     #[arg(short = 'n', long)]
@@ -15,10 +19,9 @@ struct Args {
     #[arg(short = 'E', long, overrides_with = "escape")]
     no_escape: bool,
 
-    /// String to echo 
+    /// String to echo
     #[arg()]
     text: Vec<String>,
-
 }
 
 fn main() {
@@ -31,9 +34,9 @@ fn main() {
     // Parse escapes if escape flag present
     if args.escape {
         echo = parse_escapes(&echo);
-    } 
+    }
 
-    // Check for newline removal and 
+    // Check for newline removal and
     // return result to stdout
     if args.no_newline {
         print!("{}", echo);
@@ -46,8 +49,8 @@ fn main() {
 fn parse_escapes(output: &str) -> String {
     output
         .replace("\\\\", "\\") // backslash
-        .replace("\\n", "\n")   // newline
-        .replace("\\r", "\r")   // carriage return
-        .replace("\\t", "\t")   // tab
-        .replace("\\\"", "\"")  // double quote
+        .replace("\\n", "\n") // newline
+        .replace("\\r", "\r") // carriage return
+        .replace("\\t", "\t") // tab
+        .replace("\\\"", "\"") // double quote
 }
